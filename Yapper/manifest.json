@@ -1,0 +1,11 @@
+{
+    "Id": "Macroplastics.Yapper",
+    "PackPath": "Yapper.pck",
+    "AssemblyPath": "Yapper.dll",
+    "Metadata": {
+        "Name": "Yapper TTS",
+        "Author": "Awesomerly, Sulayre",
+        "Version": "0.0.1",
+        "Description": "TTS Accesibility Utility for WEBFISHING."
+    }
+}
