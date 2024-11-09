@@ -11,7 +11,7 @@ var TTS
 func _set_up_tts(): 
 	var lib = GDNativeLibrary.new()
 	var cfg = ConfigFile.new()
- 	cfg.set_value("entry", "Windows.64", "%LIBGDTTS%")
+	cfg.set_value("entry", "Windows.64", "%LIBGDTTS%")
 	lib.config_file = cfg
 
 	var script = NativeScript.new()
