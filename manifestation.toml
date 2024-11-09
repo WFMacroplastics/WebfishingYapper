@@ -1,0 +1,16 @@
+id = "Macroplastics.Yapper"
+name = "Yapper"
+description = "TTS Accessibility Utility for WEBFISHING."
+version = "0.0.1"
+homepage = "https://github.com/WFMacroplastics/WebfishingYapper"
+author = "Sulayre, Awesomerly"
+
+icon = "icon.png"
+readme = "README.md"
+
+[project]
+godot = "./project/project.godot"
+csharp = "./Yapper/Yapper.csproj"
+
+[[dependencies]]
+thunderstore_version = "NotNet-GDWeave-2.0.13"

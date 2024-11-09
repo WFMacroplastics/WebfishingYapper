@@ -1,49 +1,14 @@
 extends Node
 
+const commands = preload("./commands.gd")
 const utils = preload("./utils.gd")
-const TTSDriver = preload("res://TTSDriver.gdns")
-var tts = TTSDriver.new()
+var tts = preload("./tts.gd").new()
 var readable_nodes:Array = []
 
-const cmds = {
-		"alt / return a selection, kinda like ctrl C?":{},
-		"space / confirm key stroke":{},
-		"in-game":{
-			"p / esc menu": {
-				"+q / options":{},
-				"+w / quick save":{},
-				"+ee / main menu ":{},
-				"+rr / close game confirm":{},
-			},
-			"t / tab":{
-				"+z / inventory":{},
-				"+x / journal":{},
-				"+c / customize":{},
-				"+v / inbox":{
-					"+f / send letter":{},
-					"+g / open letter":{},
-				},
-				"+b / player_list":{
-					"downarrow-arrow / move focus on the player list":{},
-					"leftarrow-rightarrow / move focus on the player related buttons":{},
-				},
-			},
-		},
-	}
-
-func _print_cmds(dict:Dictionary,level := 0):
-	var _level: int = level # retains local level property
-	for k in dict.keys():
-		print("\t".repeat(_level) + "["+k+"]")
-		if dict[k] is Dictionary:
-			if dict[k].size() > 0:
-				_print_cmds(dict[k], _level + 1)
-
-func _init():
-	_print_cmds(cmds)
+func _enter_tree():
+	self.add_child(tts, true)
 
 func _ready():
-	print(tts.get_voices())
 	get_tree().connect("node_added", self, "_scene_filterer", [], CONNECT_DEFERRED)
 
 func _scene_filterer(node:Node):
@@ -57,8 +22,9 @@ func _scene_filterer(node:Node):
 			for tab in node.get_node("main/menu/tabs/inventory/tabs").get_children():
 				if tab as BaseButton:
 					_refresh_connection(tab,"pressed",self,"refresh_node_descendants",[node.get_node("main/menu/tabs/inventory/Panel/items")],CONNECT_DEFERRED)
+
 func _append_text_nodes(start_node:Node):
-	var nodes = utils.get_all_children(start_node)
+	var nodes = utils._get_all_children(start_node)
 	for node in nodes:
 		var is_control = node as Control
 		if not is_control: continue
@@ -70,7 +36,7 @@ func refresh_node_descendants(start_node:Node):
 	if !start_node:
 		print("trying to refresh text nodes with a null start.")
 		return
-	var decendants = utils.get_all_children(start_node)
+	var decendants = utils._get_all_children(start_node)
 	prints("refreshing TTS'd children for",start_node)
 	for decendant in decendants:
 		for readable_node in readable_nodes:
@@ -112,7 +78,7 @@ func _connect_readable_nodes():
 		elif node is RichTextLabel:
 #			if node.is_connected("mouse_entered",self,"_read_tts"):
 #				node.disconnect("mouse_entered",self,"_read_tts")
-			_refresh_connection(node,"mouse_entered",self,"_read_tts",[utils._strip_bbcode(node.bbcode_text)])
+			_refresh_connection(node,"mouse_entered",self,"_read_tts",[node.bbcode_text])
 		elif node.get("text"):
 			var tooltipped:bool
 			for children in node.get_children():
@@ -121,7 +87,5 @@ func _connect_readable_nodes():
 			if !tooltipped:
 				_refresh_connection(node,"mouse_entered",self,"_read_tts",[node.get_class()+": "+node.text])
 
-func _read_tts(text:String):
-	if text != "":
-		print_debug()
-		tts.speak(text,true)
+func _read_tts(text: String):
+	tts.speak(text)

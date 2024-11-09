@@ -3,6 +3,8 @@
 *.user
 /local
 
+manifestation/
+
 bin/
 obj/
 GDWeave/

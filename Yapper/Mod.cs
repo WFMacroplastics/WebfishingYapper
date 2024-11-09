@@ -7,6 +7,7 @@ public class Mod : IMod {
 
     public Mod(IModInterface modInterface) {
         this.Config = modInterface.ReadConfig<Config>();
+        modInterface.RegisterScriptMod(new ResolveAssemblyPath());
 	}
 
     public void Dispose() {
