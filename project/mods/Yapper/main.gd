@@ -4,6 +4,8 @@ const commands = preload("./commands.gd")
 var tts = preload("./tts.gd").new()
 
 var current_hover = null
+var current_tooltip_header = null
+var current_tooltip_body = null
 
 func _filter_all_children(node: Node):
 	_scene_filterer(node)
@@ -51,3 +53,14 @@ func _mouse_exit(node: Node, prop: String):
 	if node.get(prop):
 		print("exited", node[prop])
 		current_hover = null
+
+func _queue_tooltip(header: String, body: String):
+	current_tooltip_header = header
+	current_tooltip_body = body
+	print(current_tooltip_header)
+	print(current_tooltip_body)
+
+func _dequeue_tooltip():
+	current_tooltip_header = null
+	current_tooltip_body = null
+	print("no more tooltip")
