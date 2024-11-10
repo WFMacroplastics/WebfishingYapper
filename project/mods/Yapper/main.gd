@@ -64,3 +64,6 @@ func _dequeue_tooltip():
 	current_tooltip_header = null
 	current_tooltip_body = null
 	print("no more tooltip")
+
+func _say_dialogue(text: String):
+	print("Dialogue: ", text)

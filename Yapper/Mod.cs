@@ -9,6 +9,7 @@ public class Mod : IMod {
         this.Config = modInterface.ReadConfig<Config>();
         modInterface.RegisterScriptMod(new ResolveAssemblyPath());
         modInterface.RegisterScriptMod(new TooltipPatch());
+        modInterface.RegisterScriptMod(new DialoguePatch());
 	}
 
     public void Dispose() {
