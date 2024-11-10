@@ -3,7 +3,6 @@ extends Node
 var TTS
 # thank you stack overflow
 const BBCODE_REGEX = "\\[\\/?(?:b|i|u|sup|url|image|color|size|font|center|left|right){1,}.*?]"
-var regex: RegEx = RegEx.new()
 
 func _strip_bbcode(text:String) -> String:
 	var regex:RegEx = RegEx.new()
@@ -34,7 +33,6 @@ func _set_up_tts():
 
 func _init():
 	self.name = "TTS"
-	regex.compile(BBCODE_REGEX)
 	_set_up_tts()
 
 func speak(text, interrupt: bool = true):
