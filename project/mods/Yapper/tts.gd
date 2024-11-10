@@ -1,10 +1,20 @@
 extends Node
 
-const utils = preload("./utils.gd")
-
 var TTS
+# thank you stack overflow
+const BBCODE_REGEX = "\\[\\/?(?:b|i|u|sup|url|image|color|size|font|center|left|right){1,}.*?]"
+var regex: RegEx = RegEx.new()
 
-# TODO: would it be desirable to refactor this?
+func _strip_bbcode(text:String) -> String:
+	var regex:RegEx = RegEx.new()
+	var parsed = text
+	if regex.compile(BBCODE_REGEX) == OK:
+		var result:Array = regex.search_all(text)
+		if result:
+			for regexres in result:
+				parsed = parsed.replace(regexres.get_string(),"")
+		regex = null
+	return parsed
 
 # Thanks Jules. YOINK!!!!!!
 # https://github.com/NotNite/WebfishingRichPresence/blob/main/project/mods/WebfishingRichPresence/main.gd
@@ -24,12 +34,12 @@ func _set_up_tts():
 
 func _init():
 	self.name = "TTS"
+	regex.compile(BBCODE_REGEX)
 	_set_up_tts()
 
 func speak(text, interrupt: bool = true):
 	if text == "": return
-	print(text)
-#	TTS.speak(utils._strip_bbcode(text), interrupt)
+	TTS.speak(_strip_bbcode(text), interrupt)
 
 # TODO: this doesn't use a flag for async
 func stop():
