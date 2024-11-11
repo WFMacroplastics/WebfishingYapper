@@ -8,6 +8,8 @@ author = "Sulayre, Awesomerly"
 icon = "icon.png"
 readme = "README.md"
 
+extra_files = [ "libgdtts.windows.x86_64.dll", "LICENSE" ]
+
 [project]
 godot = "./project/project.godot"
 csharp = "./Yapper/Yapper.csproj"
