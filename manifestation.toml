@@ -16,3 +16,6 @@ csharp = "./Yapper/Yapper.csproj"
 
 [[dependencies]]
 thunderstore_version = "NotNet-GDWeave-2.0.13"
+
+[[dependencies]]
+thunderstore_version = "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"

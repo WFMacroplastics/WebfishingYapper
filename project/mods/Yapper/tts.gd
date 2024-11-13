@@ -35,7 +35,7 @@ func _init():
 	self.name = "TTS"
 	_set_up_tts()
 
-func speak(text, interrupt: bool = true):
+func speak(text: String, interrupt: bool = false):
 	if text == "": return
 	TTS.speak(_strip_bbcode(text), interrupt)
 
