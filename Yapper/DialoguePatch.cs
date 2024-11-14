@@ -23,7 +23,7 @@ public class DialoguePatch : IScriptMod
             if (dialogueMatch.Check(token))
             {
                 yield return new Token(TokenType.Newline, 1); 
-                // if $"/root/Yapper": $"/root/Yapper"._say_dialogue(bank[i])
+                // if $"/root/Yapper": $"/root/Yapper"._queue("dialogue", bank[i])
                 yield return new Token(TokenType.CfIf);
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
@@ -31,8 +31,10 @@ public class DialoguePatch : IScriptMod
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
                 yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("_say_dialogue");
+                yield return new IdentifierToken("_queue");
                 yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("dialogue"));
+                yield return new Token(TokenType.Comma);
                 yield return new IdentifierToken("bank");
                 yield return new Token(TokenType.BracketOpen);
                 yield return new IdentifierToken("i");

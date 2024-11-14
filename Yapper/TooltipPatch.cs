@@ -33,7 +33,7 @@ public class TooltipPatch : IScriptMod
             {
                 yield return token;
 
-                // if $"/root/Yapper": $"/root/Yapper"._dequeue_tooltip()
+                // if $"/root/Yapper": $"/root/Yapper"._dequeue("tooltip")
                 yield return new Token(TokenType.CfIf);
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
@@ -41,8 +41,9 @@ public class TooltipPatch : IScriptMod
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
                 yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("_dequeue_tooltip");
+                yield return new IdentifierToken("_dequeue");
                 yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("tooltip"));
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Newline, 2);
 
@@ -51,7 +52,7 @@ public class TooltipPatch : IScriptMod
             {
                 yield return token;
 
-                // if $"/root/Yapper": $"/root/Yapper"._queue_tooltip(current_header, current_body)
+                // if $"/root/Yapper": $"/root/Yapper"._queue("tooltip", current_header, current_body)
                 yield return new Token(TokenType.CfIf);
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
@@ -59,8 +60,10 @@ public class TooltipPatch : IScriptMod
                 yield return new Token(TokenType.Dollar);
                 yield return new ConstantToken(new StringVariant("/root/Yapper"));
                 yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("_queue_tooltip");
+                yield return new IdentifierToken("_queue");
                 yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("tooltip"));
+                yield return new Token(TokenType.Comma);
                 yield return new IdentifierToken("current_header");
                 yield return new Token(TokenType.Comma);
                 yield return new IdentifierToken("current_body");

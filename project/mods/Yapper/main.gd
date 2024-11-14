@@ -4,35 +4,40 @@ const commands = preload("./commands.gd")
 var tts = preload("./tts.gd").new()
 onready var KeybindsAPI = get_node_or_null("/root/BlueberryWolfiAPIs/KeybindsAPI")
 
-var current_hover = null
-var current_tooltip_header = null
-var current_tooltip_body = null
+# stuff at the beginning has more priority over stuff at the end
+var source_list: Dictionary = {
+	"dialog": {"enabled": true, "autosay": true},
+	"tooltip": {"enabled": true, "autosay": false, "current_text": [null, null]},
+	"ui": {"enabled": true, "autosay": false, "current_text": [null, null]},
+}
 
 func _ready():
 	var tts_key_signal = KeybindsAPI.register_keybind({
-	  "action_name": "toggle_tts",
-	  "title": "Toggle Mouseover TTS. Shift reads out extended description.",
-	  "key": KEY_R,
+		"action_name": "toggle_tts",
+		"title": "Toggle Mouseover TTS. Shift reads out extended description.",
+		"key": KEY_R,
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
 
 	_filter_all_children($"/root/OptionsMenu")
 	get_tree().connect("node_added", self, "_scene_filterer")
 
-# TODO: Make this not bad.
 func _on_tts_button():
+	print(source_list)
 	var extended = Input.is_key_pressed(KEY_SHIFT)
 
-	if extended:
-		tts.speak(current_tooltip_body)
-		return
+	var sel = 0
+	if extended: sel = 1
 
-	if current_tooltip_header:
-		tts.speak(current_tooltip_header)
-		return
+	for src in source_list.values():
+		if src["autosay"]: continue
 
-	if current_hover:
-		tts.speak(current_hover)
+		var phrase = src["current_text"][sel]
+		if phrase == null: continue
+
+		_say(phrase)
+		break
+
 
 func _filter_all_children(node: Node):
 	_scene_filterer(node)
@@ -48,7 +53,7 @@ func _scene_filterer(node:Node):
 		node.mouse_filter = Control.MOUSE_FILTER_PASS
 #		print("RichTextLabel - ", node.get_class(), " ", node.bbcode_text)
 		_connect(node, "bbcode_text")
-	elif node is Label and not node.name == "stack_count" and not node.text == "purchased!":
+	elif node is Label and not node.name == "stack_count":
 		node.mouse_filter = Control.MOUSE_FILTER_PASS
 #		print("Label - ", node.text)
 		_connect(node, "text")
@@ -59,34 +64,36 @@ func _scene_filterer(node:Node):
 		node.mouse_filter = Control.MOUSE_FILTER_PASS
 #		print(node.get_class(), " - ", node.text)
 		_connect(node, "bbcode_text")
-	elif node.get("text"):
+	elif node.get("text") and not node.name == "stack_count":
 #		print(node.get_class(), " - ", node.text)
 		_connect(node, "text")
 
 func _connect(node: Node, prop: String):
 	node.connect("mouse_entered",self,"_mouse_enter", [node, prop])
-	node.connect("mouse_exited",self,"_mouse_exit", [node, prop])
+	node.connect("mouse_exited",self,"_mouse_exit")
 
 func _mouse_enter(node: Node, prop: String):
-	if node.get(prop):
-#		print(node[prop])
-		current_hover = node[prop]
+	if not node.get(prop): return
+	_queue("ui", node[prop])
 
-func _mouse_exit(node: Node, prop: String):
-	if node.get(prop):
-#		print("exited", node[prop])
-		current_hover = null
+func _mouse_exit():
+	_dequeue("ui")
 
-func _queue_tooltip(header: String, body: String):
-	current_tooltip_header = header
-	current_tooltip_body = body
-#	print(current_tooltip_header)
-#	print(current_tooltip_body)
+func _queue(source: String, header: String, body = null):
+	var cur_src = source_list[source]
 
-func _dequeue_tooltip():
-	current_tooltip_header = null
-	current_tooltip_body = null
-#	print("no more tooltip")
+	if cur_src["autosay"]:
+		_say(header)
+	else:
+		cur_src["current_text"][0] = header
+		cur_src["current_text"][1] = body
 
-func _say_dialogue(text: String):
+func _dequeue(source: String):
+	if not source in source_list: return
+	var cur_src = source_list[source]
+
+	cur_src["current_text"][0] = null
+	cur_src["current_text"][1] = null
+
+func _say(text: String):
 	tts.speak(text)
