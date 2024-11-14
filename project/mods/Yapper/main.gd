@@ -74,11 +74,11 @@ func _connect(node: Node, prop: String):
 
 func _mouse_enter(node: Node, prop: String):
 	if not node.get(prop): return
-	node.connect("hide", self, "_hidden", [node])
+	node.connect("hide", self, "_mouse_exit", [node])
 	_queue("ui", node[prop])
 
 func _mouse_exit(node: Node):
-	node.disconnect("hide", self, "_hidden")
+	node.disconnect("hide", self, "_mouse_exit")
 	_dequeue("ui")
 
 func _queue(source: String, header: String, body = null):
