@@ -70,18 +70,15 @@ func _scene_filterer(node:Node):
 
 func _connect(node: Node, prop: String):
 	node.connect("mouse_entered",self,"_mouse_enter", [node, prop])
-	node.connect("mouse_exited",self,"_mouse_exit")
+	node.connect("mouse_exited",self,"_mouse_exit", [node])
 
 func _mouse_enter(node: Node, prop: String):
 	if not node.get(prop): return
 	node.connect("hide", self, "_hidden", [node])
 	_queue("ui", node[prop])
 
-func _hidden(node: Node):
+func _mouse_exit(node: Node):
 	node.disconnect("hide", self, "_hidden")
-	_dequeue("ui")
-
-func _mouse_exit():
 	_dequeue("ui")
 
 func _queue(source: String, header: String, body = null):
