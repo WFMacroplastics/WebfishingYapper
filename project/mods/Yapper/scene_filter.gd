@@ -36,6 +36,8 @@ func _scene_filterer(node:Node):
 		_connect(node, "text")
 
 func _connect(node: Node, prop: String):
+	if node.is_connected("mouse_entered",self,"_mouse_enter"): return
+	if node.is_connected("mouse_exited",self,"_mouse_exit"): return
 	node.connect("mouse_entered",self,"_mouse_enter", [node, prop])
 	node.connect("mouse_exited",self,"_mouse_exit", [node])
 
