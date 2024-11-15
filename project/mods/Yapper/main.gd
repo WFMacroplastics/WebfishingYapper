@@ -8,7 +8,7 @@ onready var KeybindsAPI = get_node_or_null("/root/BlueberryWolfiAPIs/KeybindsAPI
 
 # stuff at the beginning has more priority over stuff at the end
 var source_list: Dictionary = {
-	"dialog": {"enabled": true, "autosay": true},
+	"dialogue": {"enabled": true, "autosay": true},
 	"tooltip": {"enabled": true, "autosay": false, "current_text": [null, null]},
 	"ui": {"enabled": true, "autosay": false, "current_text": [null, null]},
 }
