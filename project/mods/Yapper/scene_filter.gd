@@ -1,11 +1,10 @@
 extends Node
 
-onready var Yapper = $"/root/Yapper"
+onready var Main = $"/root/Yapper"
 
 func _ready():
 	_filter_all_children($"/root/OptionsMenu")
 	get_tree().connect("node_added", self, "_scene_filterer")
-	print("Scene Filterer Ready")
 
 func _filter_all_children(node: Node):
 	_scene_filterer(node)
@@ -43,8 +42,8 @@ func _connect(node: Node, prop: String):
 func _mouse_enter(node: Node, prop: String):
 	if not node.get(prop): return
 	node.connect("hide", self, "_mouse_exit", [node])
-	Yapper._queue("ui", node[prop])
+	Main._queue("ui", node[prop])
 
 func _mouse_exit(node: Node):
 	node.disconnect("hide", self, "_mouse_exit")
-	Yapper._dequeue("ui")
+	Main._dequeue("ui")

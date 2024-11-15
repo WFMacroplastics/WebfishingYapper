@@ -3,6 +3,7 @@ extends Node
 #var commands = preload("./commands.gd").new()
 var tts = preload("./tts.gd").new()
 var scene_filter = preload("./scene_filter.gd").new()
+
 onready var KeybindsAPI = get_node_or_null("/root/BlueberryWolfiAPIs/KeybindsAPI")
 
 # stuff at the beginning has more priority over stuff at the end
@@ -11,6 +12,9 @@ var source_list: Dictionary = {
 	"tooltip": {"enabled": true, "autosay": false, "current_text": [null, null]},
 	"ui": {"enabled": true, "autosay": false, "current_text": [null, null]},
 }
+
+func _enter_tree():
+	self.add_child(scene_filter)
 
 func _ready():
 	var tts_key_signal = KeybindsAPI.register_keybind({
