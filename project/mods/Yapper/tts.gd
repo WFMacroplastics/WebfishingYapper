@@ -1,5 +1,7 @@
 extends Node
 
+onready var LucysLib := get_node_or_null("/root/LucysLib")
+
 var TTS
 # thank you stack overflow
 const BBCODE_REGEX = "\\[\\/?(?:b|i|u|sup|url|image|color|size|font|center|left|right){1,}.*?]"
@@ -37,7 +39,9 @@ func _init():
 
 func speak(text: String, interrupt: bool = false):
 	if text == "": return
-	TTS.speak(_strip_bbcode(text), interrupt)
+	# Thanks, Lucy!
+	var stripped = LucysLib.BBCode.parse_bbcode_text(text).get_stripped()
+	TTS.speak(stripped, interrupt)
 
 # TODO: this doesn't use a flag for async
 func stop():

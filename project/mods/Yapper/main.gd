@@ -15,6 +15,7 @@ var source_list: Dictionary = {
 
 func _enter_tree():
 	self.add_child(scene_filter)
+	self.add_child(tts)
 
 func _ready():
 	var tts_key_signal = KeybindsAPI.register_keybind({
