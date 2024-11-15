@@ -3,13 +3,14 @@
 namespace Yapper;
 
 public class Mod : IMod {
-    public Config Config;
+    public static Config Config = null!;
 
     public Mod(IModInterface modInterface) {
-        this.Config = modInterface.ReadConfig<Config>();
+        Config = modInterface.ReadConfig<Config>();
         modInterface.RegisterScriptMod(new ResolveAssemblyPath());
         modInterface.RegisterScriptMod(new TooltipPatch());
         modInterface.RegisterScriptMod(new DialoguePatch());
+        modInterface.RegisterScriptMod(new ConfigPatch());
 	}
 
     public void Dispose() {

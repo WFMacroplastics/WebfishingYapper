@@ -52,3 +52,9 @@ func get_voices():
 
 func is_speaking():
 	return TTS.is_speaking()
+
+func get_rate():
+	return TTS.get_rate()
+
+func set_rate(rate: int):
+	return TTS.set_rate(rate)

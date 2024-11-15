@@ -4,5 +4,5 @@ namespace Yapper;
 
 public class Config
 {
-    //[JsonInclude] public bool setting = false;
+    [JsonInclude] public int VoiceSpeed = 0;
 }

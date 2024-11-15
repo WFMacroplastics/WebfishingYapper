@@ -24,6 +24,11 @@ func _ready():
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
 
+# A call to this gets patched into the _ready function
+# TODO: figure out a more fleshed out way to do this
+func _init_voice_config(speed: int):
+	tts.set_rate(speed)
+
 func _on_tts_button():
 	print(source_list)
 	var extended = Input.is_key_pressed(KEY_SHIFT)
@@ -37,14 +42,14 @@ func _on_tts_button():
 		var phrase = src["current_text"][sel]
 		if phrase == null: continue
 
-		_say(phrase)
+		tts.speak(phrase)
 		break
 
 func _queue(source: String, header: String, body = null):
 	var cur_src = source_list[source]
 
 	if cur_src["autosay"]:
-		_say(header)
+		tts.speak(header)
 	else:
 		cur_src["current_text"][0] = header
 		cur_src["current_text"][1] = body
@@ -55,6 +60,3 @@ func _dequeue(source: String):
 
 	cur_src["current_text"][0] = null
 	cur_src["current_text"][1] = null
-
-func _say(text: String):
-	tts.speak(text)
