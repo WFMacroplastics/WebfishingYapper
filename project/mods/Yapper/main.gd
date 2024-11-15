@@ -1,8 +1,11 @@
 extends Node
 
 #var commands = preload("./commands.gd").new()
-var tts = preload("./tts.gd").new()
-var scene_filter = preload("./scene_filter.gd").new()
+const tts_t := preload("./tts.gd")
+const scene_filter_t := preload("./scene_filter.gd")
+
+var tts: tts_t
+var scene_filter: scene_filter_t
 
 onready var KeybindsAPI = get_node_or_null("/root/BlueberryWolfiAPIs/KeybindsAPI")
 
@@ -14,8 +17,10 @@ var source_list: Dictionary = {
 }
 
 func _enter_tree():
-	self.add_child(scene_filter)
+	tts = tts_t.new()
 	self.add_child(tts)
+	scene_filter = scene_filter_t.new()
+	self.add_child(scene_filter)
 
 func _ready():
 	var tts_key_signal = KeybindsAPI.register_keybind({
