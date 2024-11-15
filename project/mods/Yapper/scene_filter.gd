@@ -47,5 +47,6 @@ func _mouse_enter(node: Node, prop: String):
 	Main._queue("ui", node[prop])
 
 func _mouse_exit(node: Node):
-	node.disconnect("hide", self, "_mouse_exit")
+	if node.is_connected("hide", self, "_mouse_exit"):
+		node.disconnect("hide", self, "_mouse_exit")
 	Main._dequeue("ui")
