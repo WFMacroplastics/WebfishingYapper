@@ -33,7 +33,7 @@ func _ready():
 # A call to this gets patched into the _ready function
 # TODO: figure out a more fleshed out way to do this
 func _init_voice_config(speed: int):
-	tts.set_rate(speed)
+	tts.set_rate(clamp(speed, 0, 100))
 
 func _on_tts_button():
 	print(source_list)
