@@ -19,6 +19,8 @@ func _scene_filterer(node:Node):
 	if node is TextureRect:
 		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	elif node is RichTextLabel:
+		if node.get_parent().name == "gamechat":
+			return # chat will have its own separate thing
 		node.mouse_filter = Control.MOUSE_FILTER_PASS
 #		print("RichTextLabel - ", node.get_class(), " ", node.bbcode_text)
 		_connect(node, "text")
