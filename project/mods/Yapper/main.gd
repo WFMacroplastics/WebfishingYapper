@@ -18,8 +18,8 @@ var source_list: Dictionary = {
 
 func _enter_tree():
 	tts = tts_t.new()
-	self.add_child(tts)
 	scene_filter = scene_filter_t.new()
+	self.add_child(tts)
 	self.add_child(scene_filter)
 
 func _ready():
@@ -39,13 +39,14 @@ func _on_tts_button():
 	print(source_list)
 	var extended = Input.is_key_pressed(KEY_SHIFT)
 
-	var sel = 0
-	if extended: sel = 1
-
 	for src in source_list.values():
 		if src["autosay"]: continue
 
-		var phrase = src["current_text"][sel]
+		var cur_txt = src["current_text"]
+		var phrase = cur_txt[0]
+		if extended and cur_txt[1] != null:
+			phrase = cur_txt[1]
+
 		if phrase == null: continue
 
 		tts.speak(phrase)
