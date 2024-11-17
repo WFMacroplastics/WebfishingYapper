@@ -51,14 +51,36 @@ func stop():
 func skip():
 	pass
 
-func get_voices():
-	return TTS.get_voices()
-
 func is_speaking():
 	return TTS.is_speaking()
 
-func get_rate():
+
+func get_voices() -> Array:
+	return TTS.get_voices()
+
+func set_voice(name: String):
+	TTS.set_voice(name)
+
+
+func get_volume() -> int:
+	return TTS.get_volume()
+
+# 0 to 100
+func set_volume(volume: int):
+	TTS.set_volume(volume)
+
+
+func get_pitch() -> float:
+	return TTS.get_pitch()
+
+# -10 to 10
+func set_pitch(pitch: float):
+	TTS.set_rate(pitch)
+
+
+func get_rate() -> int:
 	return TTS.get_rate()
 
+# -100 to 100
 func set_rate(rate: int):
-	return TTS.set_rate(rate)
+	TTS.set_rate(rate)
