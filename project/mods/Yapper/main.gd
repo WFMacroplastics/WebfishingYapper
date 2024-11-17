@@ -14,6 +14,7 @@ var source_list: Dictionary = {
 	"dialogue": {"enabled": true, "autosay": true},
 	"tooltip": {"enabled": true, "autosay": false, "current_text": [null, null]},
 	"ui": {"enabled": true, "autosay": false, "current_text": [null, null]},
+	"chat": {"enabled": false, "autosay": true},
 }
 
 func _enter_tree():

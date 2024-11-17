@@ -11,6 +11,7 @@ public class Mod : IMod {
         modInterface.RegisterScriptMod(new TooltipPatch());
         modInterface.RegisterScriptMod(new DialoguePatch());
         modInterface.RegisterScriptMod(new ConfigPatch());
+        modInterface.RegisterScriptMod(new ChatPatch());
 	}
 
     public void Dispose() {
