@@ -75,7 +75,7 @@ func get_pitch() -> float:
 
 # -10 to 10
 func set_pitch(pitch: float):
-	TTS.set_rate(pitch)
+	TTS.set_pitch(pitch)
 
 
 func get_rate() -> int:
