@@ -1,5 +1,7 @@
 extends Node
 
+const MOD_ID: String = "Yapper"
+
 #var commands = preload("./commands.gd").new()
 const tts_t := preload("./tts.gd")
 const scene_filter_t := preload("./scene_filter.gd")
@@ -7,14 +9,27 @@ const scene_filter_t := preload("./scene_filter.gd")
 var tts: tts_t
 var scene_filter: scene_filter_t
 
-onready var KeybindsAPI = get_node_or_null("/root/BlueberryWolfiAPIs/KeybindsAPI")
+onready var KeybindsAPI := $"/root/BlueberryWolfiAPIs/KeybindsAPI"
+onready var TackleBox := $"/root/TackleBox"
+
+var config: Dictionary
+var default_config: Dictionary = {
+	"voice_speed": 0,
+	"voice_pitch": 0,
+	"voice_volume": 100,
+	"dialog": true,
+	"ui": true,
+	"tooltip": true,
+	"chat": false,
+}
 
 # stuff at the beginning has more priority over stuff at the end
+# There might be a need for a better system than this
 var source_list: Dictionary = {
-	"dialogue": {"enabled": true, "autosay": true},
-	"tooltip": {"enabled": true, "autosay": false, "current_text": [null, null]},
-	"ui": {"enabled": true, "autosay": false, "current_text": [null, null]},
-	"chat": {"enabled": false, "autosay": true},
+	"dialogue": {"autosay": true},
+	"tooltip": {"autosay": false, "current_text": [null, null]},
+	"ui": {"autosay": false, "current_text": [null, null]},
+	"chat": {"autosay": true},
 }
 
 func _enter_tree():
@@ -24,6 +39,8 @@ func _enter_tree():
 	self.add_child(scene_filter)
 
 func _ready():
+	_init_config()
+	_init_voice_config()
 	var tts_key_signal = KeybindsAPI.register_keybind({
 		"action_name": "toggle_tts",
 		"title": "Toggle Mouseover TTS. Shift reads out extended description.",
@@ -31,10 +48,22 @@ func _ready():
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
 
+func _init_config() -> void:
+	var saved_config = TackleBox.get_mod_config(MOD_ID)
+
+	for key in default_config.keys():
+		if not saved_config[key]: # If the config property isn't saved...
+			saved_config[key] = default_config[key] # Set it to the default
+	
+	config = saved_config
+	TackleBox.set_mod_config(MOD_ID, config)
+
 # A call to this gets patched into the _ready function
 # TODO: figure out a more fleshed out way to do this
-func _init_voice_config(speed: int):
-	tts.set_rate(clamp(speed, 0, 100))
+func _init_voice_config():
+	tts.set_rate(clamp(config["voice_speed"], -100, 100))
+	tts.set_volume(clamp(config["voice_volume"], 0, 100))
+	tts.set_pitch(clamp(config["voice_pitch"], -10, 10))
 
 func _on_tts_button():
 	print(source_list)
@@ -54,6 +83,8 @@ func _on_tts_button():
 		break
 
 func _queue(source: String, header: String, body = null):
+	if config[source] == false: return
+
 	var cur_src = source_list[source]
 
 	if cur_src["autosay"]:

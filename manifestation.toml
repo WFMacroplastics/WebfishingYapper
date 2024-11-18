@@ -24,3 +24,7 @@ thunderstore_version = "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
 [[dependencies]]
 id = "LucysLib"
 thunderstore_version = "team_sea_slug-LucysLib-0.1.2"
+
+[[dependencies]]
+id = "TackleBox"
+thunderstore_version = "PuppyGirl-TackleBox-0.5.1"
