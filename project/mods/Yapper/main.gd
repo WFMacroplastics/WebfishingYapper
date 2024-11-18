@@ -47,7 +47,9 @@ func _ready():
 		"key": KEY_R,
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
+	TackleBox.connect("mod_config_updated", self, "_on_config_update")
 
+# https://github.com/puppy-girl/TackleBox/blob/main/README.md
 func _init_config() -> void:
 	var saved_config = TackleBox.get_mod_config(MOD_ID)
 
@@ -57,6 +59,17 @@ func _init_config() -> void:
 	
 	config = saved_config
 	TackleBox.set_mod_config(MOD_ID, config)
+
+func _on_config_update(mod_id: String, new_config: Dictionary) -> void:
+	if mod_id != MOD_ID:
+		return
+	
+	if config.hash() == new_config.hash():
+		return
+	
+	config = new_config
+
+	_init_voice_config()
 
 # A call to this gets patched into the _ready function
 # TODO: figure out a more fleshed out way to do this
