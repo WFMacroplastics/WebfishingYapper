@@ -56,17 +56,17 @@ func _init_config() -> void:
 	for key in default_config.keys():
 		if not saved_config[key]: # If the config property isn't saved...
 			saved_config[key] = default_config[key] # Set it to the default
-	
+
 	config = saved_config
 	TackleBox.set_mod_config(MOD_ID, config)
 
 func _on_config_update(mod_id: String, new_config: Dictionary) -> void:
 	if mod_id != MOD_ID:
 		return
-	
+
 	if config.hash() == new_config.hash():
 		return
-	
+
 	config = new_config
 
 	_init_voice_config()

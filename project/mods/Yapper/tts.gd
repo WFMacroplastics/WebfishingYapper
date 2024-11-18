@@ -19,7 +19,7 @@ func _strip_bbcode(text:String) -> String:
 
 # Thanks Jules. YOINK!!!!!!
 # https://github.com/NotNite/WebfishingRichPresence/blob/main/project/mods/WebfishingRichPresence/main.gd
-func _set_up_tts(): 
+func _set_up_tts():
 	var lib = GDNativeLibrary.new()
 	var cfg = ConfigFile.new()
 	cfg.set_value("entry", "Windows.64", "%LIBGDTTS%")
@@ -29,7 +29,7 @@ func _set_up_tts():
 	script.library = lib
 	script.resource_name = "TTSDriver"
 	script.set_class_name("TTSDriver")
-	
+
 	TTS = Node.new()
 	TTS.set_script(script)
 
