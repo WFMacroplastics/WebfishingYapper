@@ -17,6 +17,7 @@ var default_config: Dictionary = {
 	"voice_speed": 0,
 	"voice_pitch": 0,
 	"voice_volume": 100,
+	"voice": "",
 	"dialog": true,
 	"ui": true,
 	"tooltip": true,
@@ -77,6 +78,7 @@ func _init_voice_config():
 	tts.set_rate(clamp(config["voice_speed"], -100, 100))
 	tts.set_volume(clamp(config["voice_volume"], 0, 100))
 	tts.set_pitch(clamp(config["voice_pitch"], -10, 10))
+	tts.set_voice(config["voice"])
 
 func _on_tts_button():
 	print(source_list)
