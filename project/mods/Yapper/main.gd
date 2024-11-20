@@ -2,10 +2,10 @@ extends Node
 
 const MOD_ID: String = "Yapper"
 
-#var commands = preload("./commands.gd").new()
-const tts_t := preload("./tts.gd")
-const scene_filter_t := preload("./scene_filter.gd")
-const MAINMENU_BUTTON := preload("res://mods/Yapper/YapperMainMenuButton.tscn")
+#var commands = preload("./scenes/commands/commands.gd").new()
+const tts_t := preload("./scripts/tts.gd")
+const scene_filter_t := preload("./scripts/scene_filter.gd")
+const MAINMENU_BUTTON := preload("./scenes/settings/YapperMainMenuButton.tscn")
 
 var tts: tts_t
 var scene_filter: scene_filter_t

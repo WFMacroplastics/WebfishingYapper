@@ -8,7 +8,7 @@ namespace Yapper;
 // Thanks Jules:
 // https://github.com/NotNite/WebfishingRichPresence/blob/main/WebfishingRichPresence/LibRPCFetcher.cs
 public class ResolveAssemblyPath : IScriptMod {
-    public bool ShouldRun(string path) => path == "res://mods/Yapper/tts.gdc";
+    public bool ShouldRun(string path) => path == "res://mods/Yapper/scripts/tts.gdc";
 
     public IEnumerable<Token> Modify(string path, IEnumerable<Token> tokens) {
         foreach (var token in tokens) {

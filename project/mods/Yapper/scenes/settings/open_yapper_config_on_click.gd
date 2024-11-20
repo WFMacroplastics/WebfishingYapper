@@ -1,5 +1,5 @@
 extends GenericUIButton
-const YapperConfig = preload("res://mods/Yapper/options_menu.tscn")
+const YapperConfig = preload("res://mods/Yapper/scenes/settings/options_menu.tscn")
 
 
 func _on_quit_pressed():
