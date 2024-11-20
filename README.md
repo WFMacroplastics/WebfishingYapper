@@ -1,6 +1,6 @@
 # Yapper - by Awesomerly & Sulayre
 
-Yapper is an accessibility mod for Webfishing that integrates text-to-speech into the game. It can read out dialog, chat messages, and UI elements (with a hotkey). It uses the very useful [godot_tts](https://github.com/bruvzg/godot_tts) library by bruvzg to talk to Microsoft Speech API.
+Yapper is an accessibility mod for Webfishing that integrates text-to-speech into the game. It can read out dialog, chat messages, and UI elements (with a hotkey). It uses the very useful [godot_tts](https://github.com/bruvzg/godot_tts) library by bruvzg to talk to the Microsoft Speech API.
 
 ## Installation instructions
 
