@@ -1,6 +1,9 @@
 extends Panel
 
-onready var tts = $"/root/Yapper/TTS"
+onready var Yapper := $"/root/Yapper"
+onready var tts := $"/root/Yapper/TTS"
+onready var TackleBox := $"/root/TackleBox"
+
 onready var speaker_picker: OptionButton = $"%SpeakerPicker"
 
 var local_volume
@@ -22,17 +25,25 @@ func _ready():
 func _on_close_pressed():
 	queue_free()
 
+func _set_tacklebox_cfg(key: String, value):
+	var cfg = Yapper.config.duplicate()
+	cfg[key] = value
+	TackleBox.set_mod_config(Yapper.MOD_ID, cfg)
+
+
+# TODO: HANDLE ERROR
 func _on_SpeakerPicker_item_selected(index):
-	tts.set_voice(speaker_picker.get_item_metadata(index))
+	var selected_voice = speaker_picker.get_item_metadata(index)
+	_set_tacklebox_cfg("voice", selected_voice)
 
 func _on_VolumeSlider_drag_ended(value_changed):
-	tts.set_volume(local_volume)
+	_set_tacklebox_cfg("voice_volume", local_volume)
 
 func _on_SpeedSlider_drag_ended(value_changed):
-	tts.set_rate(local_speed)
+	_set_tacklebox_cfg("voice_speed", local_speed)
 
 func _on_PitchSlider_drag_ended(value_changed):
-	tts.set_pitch(local_pitch)
+	_set_tacklebox_cfg("voice_pitch", local_pitch)
 
 
 func _on_VolumeSlider_value_changed(value):
