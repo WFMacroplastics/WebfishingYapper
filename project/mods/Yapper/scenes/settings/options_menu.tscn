@@ -94,6 +94,7 @@ text = "Speaker"
 align = 1
 
 [node name="SpeakerPicker" type="OptionButton" parent="VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox"]
+unique_name_in_owner = true
 margin_left = 189.0
 margin_right = 389.0
 margin_bottom = 34.0
@@ -238,6 +239,9 @@ script = ExtResource( 3 )
 
 [connection signal="item_selected" from="VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox/SpeakerPicker" to="." method="_on_SpeakerPicker_item_selected"]
 [connection signal="drag_ended" from="VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox/VolumeSlider" to="." method="_on_VolumeSlider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
 [connection signal="drag_ended" from="VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox/SpeedSlider" to="." method="_on_SpeedSlider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox/SpeedSlider" to="." method="_on_SpeedSlider_value_changed"]
 [connection signal="drag_ended" from="VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox/PitchSlider" to="." method="_on_PitchSlider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox/PitchSlider" to="." method="_on_PitchSlider_value_changed"]
 [connection signal="pressed" from="close" to="." method="_on_close_pressed"]
