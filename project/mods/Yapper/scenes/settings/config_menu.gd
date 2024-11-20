@@ -15,12 +15,20 @@ var voices
 # TODO: set dropdown to right value from config
 func _ready():
 	voices = tts.get_voices()
+	var cur_voice = Yapper.config.voice
 	for v in voices:
 		var readable_name = v["name"]
 		readable_name = readable_name.replace("com.apple.speech.synthesis.voice.", "")
 		readable_name = readable_name.replace("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\", "")
 		speaker_picker.add_item(readable_name)
-		speaker_picker.set_item_metadata(speaker_picker.get_item_count() - 1, v["name"])
+		var id = speaker_picker.get_item_count() - 1
+		speaker_picker.set_item_metadata(id, v["name"])
+		if cur_voice == v["name"]:
+			speaker_picker.select(id)
+
+	$"%VolumeSlider".value = Yapper.config.voice_volume
+	$"%SpeedSlider".value  = Yapper.config.voice_speed
+	$"%PitchSlider".value  = Yapper.config.voice_pitch
 
 func _on_close_pressed():
 	queue_free()

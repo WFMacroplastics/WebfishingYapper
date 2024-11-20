@@ -126,6 +126,7 @@ text = "Volume"
 align = 1
 
 [node name="VolumeSlider" type="HSlider" parent="VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox"]
+unique_name_in_owner = true
 margin_left = 127.0
 margin_right = 373.0
 margin_bottom = 34.0
@@ -162,6 +163,7 @@ text = "Speed"
 align = 1
 
 [node name="SpeedSlider" type="HSlider" parent="VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox"]
+unique_name_in_owner = true
 margin_left = 127.0
 margin_right = 373.0
 margin_bottom = 34.0
@@ -198,6 +200,7 @@ text = "Pitch"
 align = 1
 
 [node name="PitchSlider" type="HSlider" parent="VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox"]
+unique_name_in_owner = true
 margin_left = 127.0
 margin_right = 373.0
 margin_bottom = 34.0
