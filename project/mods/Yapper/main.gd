@@ -5,6 +5,7 @@ const MOD_ID: String = "Yapper"
 #var commands = preload("./commands.gd").new()
 const tts_t := preload("./tts.gd")
 const scene_filter_t := preload("./scene_filter.gd")
+const MAINMENU_BUTTON := preload("res://mods/Yapper/YapperMainMenuButton.tscn")
 
 var tts: tts_t
 var scene_filter: scene_filter_t
@@ -38,6 +39,7 @@ func _enter_tree():
 	scene_filter = scene_filter_t.new()
 	self.add_child(tts)
 	self.add_child(scene_filter)
+	get_tree().connect("node_added",self,"_on_node_added")
 
 func _ready():
 	_init_config()
@@ -49,6 +51,12 @@ func _ready():
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
 	TackleBox.connect("mod_config_updated", self, "_on_config_update")
+
+func _on_node_added(node: Node):
+	var is_esc_menu = node.name == "esc_menu" and node.get_parent() == get_node_or_null("/root/playerhud")
+	var is_main_menu = node.name == "main_menu" and node.get_parent() == get_tree().root
+	if is_esc_menu or is_main_menu:
+		node.get_node("VBoxContainer").add_child(MAINMENU_BUTTON.instance())
 
 # https://github.com/puppy-girl/TackleBox/blob/main/README.md
 func _init_config() -> void:
