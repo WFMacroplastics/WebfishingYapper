@@ -13,15 +13,4 @@
         <Reference Include="GDWeave" Private="false" />
         <Reference Include="Serilog" Private="false" />
     </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(GDWeavePath)' != ''">
-        <ItemGroup>
-            <_SourceFiles Include="$(OutDir)\**\*.*"/>
-        </ItemGroup>
-
-        <Copy
-                SourceFiles="@(_SourceFiles)"
-                DestinationFolder="$(GDWeavePath)/mods/$(AssemblyName)"
-        />
-    </Target>
 </Project>
