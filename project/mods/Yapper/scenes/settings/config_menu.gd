@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 onready var Yapper := $"/root/Yapper"
 onready var tts := $"/root/Yapper/TTS"

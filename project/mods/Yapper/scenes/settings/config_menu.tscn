@@ -1,0 +1,266 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Themes/panel_med.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets/Themes/main.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/Menus/Main Menu/ui_generic_button.gd" type="Script" id=3]
+[ext_resource path="res://mods/Yapper/scenes/settings/config_menu.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Textures/UI/knot_sep2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Themes/main_font_tiny.tres" type="DynamicFont" id=6]
+
+[node name="config_menu" type="CanvasLayer"]
+layer = 3
+script = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -642, -479 )
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0627451, 0.109804, 0.192157, 0.313726 )
+
+[node name="Spatial" type="Panel" parent="Control"]
+anchor_left = 0.312854
+anchor_top = 0.163889
+anchor_right = 0.680208
+anchor_bottom = 0.825815
+margin_left = 14.3194
+margin_bottom = 0.119812
+rect_min_size = Vector2( 436, 322 )
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Spatial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 11.0
+margin_right = -12.0
+margin_bottom = -11.0
+custom_constants/separation = 4
+
+[node name="Label" type="Label" parent="Control/Spatial/VBoxContainer"]
+margin_right = 667.0
+margin_bottom = 34.0
+text = "YAPPER CONFIGURATION"
+align = 1
+
+[node name="sep" type="TextureRect" parent="Control/Spatial/VBoxContainer"]
+margin_top = 38.0
+margin_right = 667.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="Control/Spatial/VBoxContainer"]
+margin_top = 74.0
+margin_right = 667.0
+margin_bottom = 692.0
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Spatial/VBoxContainer/Panel"]
+anchor_left = 0.026699
+anchor_top = 0.0265487
+anchor_right = 0.973301
+anchor_bottom = 0.973451
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label2" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+margin_right = 631.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "Voice Settings"
+align = 1
+
+[node name="VSpeaker" type="Panel" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+show_behind_parent = true
+margin_top = 33.0
+margin_right = 120.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 120, 34 )
+size_flags_horizontal = 0
+
+[node name="hbox" type="HBoxContainer" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeaker"]
+anchor_right = 3.25
+anchor_bottom = 1.0
+margin_right = -3.05176e-05
+
+[node name="Label" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox"]
+margin_right = 123.0
+margin_bottom = 34.0
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 0.47
+text = "Speaker"
+align = 1
+
+[node name="SpeakerPicker" type="OptionButton" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox"]
+unique_name_in_owner = true
+margin_left = 189.0
+margin_right = 389.0
+margin_bottom = 34.0
+grow_horizontal = 0
+rect_min_size = Vector2( 200, 0 )
+focus_neighbour_top = NodePath("../../../../../../close")
+focus_neighbour_bottom = NodePath("../../../VVolumePnl/hbox/VolumeSlider")
+size_flags_horizontal = 10
+size_flags_vertical = 3
+text = "MISSING"
+align = 1
+
+[node name="VVolumePnl" type="Panel" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+show_behind_parent = true
+margin_top = 79.0
+margin_right = 631.0
+margin_bottom = 113.0
+rect_min_size = Vector2( 0, 34 )
+
+[node name="hbox" type="HBoxContainer" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox"]
+margin_right = 200.0
+margin_bottom = 34.0
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 0.5
+text = "Volume"
+align = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox"]
+unique_name_in_owner = true
+margin_left = 204.0
+margin_right = 606.0
+margin_bottom = 34.0
+focus_neighbour_top = NodePath("../../../VSpeaker/hbox/SpeakerPicker")
+focus_neighbour_bottom = NodePath("../../../VSpeedPnl/hbox/SpeedSlider")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 100.0
+
+[node name="Control" type="Control" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox"]
+margin_left = 610.0
+margin_right = 631.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VSpeedPnl" type="Panel" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+show_behind_parent = true
+margin_top = 125.0
+margin_right = 631.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 34 )
+
+[node name="hbox" type="HBoxContainer" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox"]
+margin_right = 200.0
+margin_bottom = 34.0
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 0.5
+text = "Speed"
+align = 1
+
+[node name="SpeedSlider" type="HSlider" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox"]
+unique_name_in_owner = true
+margin_left = 204.0
+margin_right = 606.0
+margin_bottom = 34.0
+focus_neighbour_top = NodePath("../../../VVolumePnl/hbox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../../../VPitchPnl/hbox/PitchSlider")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = -100.0
+
+[node name="Control" type="Control" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox"]
+margin_left = 610.0
+margin_right = 631.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VPitchPnl" type="Panel" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+show_behind_parent = true
+margin_top = 171.0
+margin_right = 631.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 0, 34 )
+
+[node name="hbox" type="HBoxContainer" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox"]
+margin_right = 200.0
+margin_bottom = 34.0
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 0.5
+text = "Pitch"
+align = 1
+
+[node name="PitchSlider" type="HSlider" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox"]
+unique_name_in_owner = true
+margin_left = 204.0
+margin_right = 606.0
+margin_bottom = 34.0
+focus_neighbour_top = NodePath("../../../VSpeedPnl/hbox/SpeedSlider")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+
+[node name="Control" type="Control" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox"]
+margin_left = 610.0
+margin_right = 631.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Label3" type="Label" parent="Control/Spatial/VBoxContainer/Panel/VBoxContainer"]
+visible = false
+margin_top = 217.0
+margin_right = 390.0
+margin_bottom = 238.0
+custom_colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "TTS Options"
+align = 1
+
+[node name="close" type="Button" parent="Control/Spatial"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -31.0001
+margin_top = -23.0
+margin_right = 28.6355
+margin_bottom = 18.9403
+rect_pivot_offset = Vector2( 243, 71 )
+focus_neighbour_bottom = NodePath("../VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox/SpeakerPicker")
+text = "Close"
+script = ExtResource( 3 )
+
+[connection signal="item_selected" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeaker/hbox/SpeakerPicker" to="." method="_on_SpeakerPicker_item_selected"]
+[connection signal="drag_ended" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox/VolumeSlider" to="." method="_on_VolumeSlider_drag_ended"]
+[connection signal="value_changed" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VVolumePnl/hbox/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
+[connection signal="drag_ended" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox/SpeedSlider" to="." method="_on_SpeedSlider_drag_ended"]
+[connection signal="value_changed" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VSpeedPnl/hbox/SpeedSlider" to="." method="_on_SpeedSlider_value_changed"]
+[connection signal="drag_ended" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox/PitchSlider" to="." method="_on_PitchSlider_drag_ended"]
+[connection signal="value_changed" from="Control/Spatial/VBoxContainer/Panel/VBoxContainer/VPitchPnl/hbox/PitchSlider" to="." method="_on_PitchSlider_value_changed"]
+[connection signal="pressed" from="Control/Spatial/close" to="." method="_on_close_pressed"]
