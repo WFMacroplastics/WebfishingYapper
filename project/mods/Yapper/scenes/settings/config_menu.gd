@@ -26,9 +26,14 @@ func _ready():
 		if cur_voice == v["name"]:
 			speaker_picker.select(id)
 
-	$"%VolumeSlider".value = Yapper.config.voice_volume
-	$"%SpeedSlider".value  = Yapper.config.voice_speed
-	$"%PitchSlider".value  = Yapper.config.voice_pitch
+	$"%VolumeSlider".value = Yapper.config["voice_volume"]
+	$"%SpeedSlider".value  = Yapper.config["voice_speed"]
+	$"%PitchSlider".value  = Yapper.config["voice_pitch"]
+
+	$"%CheckChat".pressed  = Yapper.config["chat"]
+	$"%CheckDialogue".pressed  = Yapper.config["dialogue"]
+	$"%ReadTooltips".pressed  = Yapper.config["tooltip"]
+	$"%ReadMenuText".pressed  = Yapper.config["ui"]
 
 func _on_close_pressed():
 	queue_free()
@@ -53,7 +58,6 @@ func _on_SpeedSlider_drag_ended(value_changed):
 func _on_PitchSlider_drag_ended(value_changed):
 	_set_tacklebox_cfg("voice_pitch", local_pitch)
 
-
 func _on_VolumeSlider_value_changed(value):
 	local_volume = value
 
@@ -65,16 +69,16 @@ func _on_PitchSlider_value_changed(value):
 
 
 func _on_CheckChat_toggled(button_pressed):
-	pass # Replace with function body.
+	_set_tacklebox_cfg("chat", button_pressed)
 
 
 func _on_CheckDialogue_toggled(button_pressed):
-	pass # Replace with function body.
+	_set_tacklebox_cfg("dialogue", button_pressed)
 
 
 func _on_ReadTooltips_toggled(button_pressed):
-	pass # Replace with function body.
+	_set_tacklebox_cfg("tooltip", button_pressed)
 
 
 func _on_ReadMenuText_toggled(button_pressed):
-	pass # Replace with function body.
+	_set_tacklebox_cfg("ui", button_pressed)
