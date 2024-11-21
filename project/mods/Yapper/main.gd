@@ -19,7 +19,7 @@ var default_config: Dictionary = {
 	"voice_pitch": 0,
 	"voice_volume": 100,
 	"voice": "",
-	"dialog": true,
+	"dialogue": true,
 	"ui": true,
 	"tooltip": true,
 	"chat": false,
