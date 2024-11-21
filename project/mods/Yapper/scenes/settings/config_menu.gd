@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 onready var Yapper := $"/root/Yapper"
 onready var tts := $"/root/Yapper/TTS"
