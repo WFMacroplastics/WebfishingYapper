@@ -46,7 +46,7 @@ func _ready():
 	_init_voice_config()
 	var tts_key_signal = KeybindsAPI.register_keybind({
 		"action_name": "toggle_tts",
-		"title": "Toggle Mouseover TTS. Shift reads out extended description.",
+		"title": "Read Hovered Text:",
 		"key": KEY_R,
 	})
 	KeybindsAPI.connect(tts_key_signal + "_up", self, "_on_tts_button")
