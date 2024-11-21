@@ -18,7 +18,7 @@ Yapper also adds a hotkey to the settings to read out UI elements and tooltips, 
 
 ## Building Yapper
 
-We use NotNite's [manifestation](https://github.com/NotNite/manifestation) to package and test Yapper. It builds the C# dll and Godot .pck files and arranges folders to allow for easy distribution of mods. It can also optionally copy the built mod to your mods directory. Running manifestation is as simple as `manifestation ./manifestation.toml -copy`. For more info, check out manifestation's README.
+We use NotNite's [manifestation](https://github.com/NotNite/manifestation) to package and test Yapper. It builds the C# dll and Godot .pck files and arranges folders to allow for easy distribution of mods. It can also optionally copy the built mod to your mods directory. Running manifestation is as simple as `manifestation ./manifestation.toml --copy`. For more info, check out manifestation's README.
 
 ## Credits
 
