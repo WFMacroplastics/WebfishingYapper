@@ -62,3 +62,19 @@ func _on_SpeedSlider_value_changed(value):
 
 func _on_PitchSlider_value_changed(value):
 	local_pitch = value
+
+
+func _on_CheckChat_toggled(button_pressed):
+	pass # Replace with function body.
+
+
+func _on_CheckDialogue_toggled(button_pressed):
+	pass # Replace with function body.
+
+
+func _on_ReadTooltips_toggled(button_pressed):
+	pass # Replace with function body.
+
+
+func _on_ReadMenuText_toggled(button_pressed):
+	pass # Replace with function body.
