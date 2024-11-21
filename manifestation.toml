@@ -1,7 +1,7 @@
 id = "Yapper"
 name = "Yapper"
 description = "TTS Accessibility Utility for WEBFISHING."
-version = "0.0.1"
+version = "1.0.0"
 homepage = "https://github.com/WFMacroplastics/WebfishingYapper"
 author = "Sulayre, Awesomerly"
 
