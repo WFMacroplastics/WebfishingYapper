@@ -56,7 +56,8 @@ func _on_node_added(node: Node):
 	var is_esc_menu = node.name == "esc_menu" and node.get_parent() == get_node_or_null("/root/playerhud")
 	var is_main_menu = node.name == "main_menu" and node.get_parent() == get_tree().root
 	if is_esc_menu or is_main_menu:
-		node.get_node("VBoxContainer").add_child(MAINMENU_BUTTON.instance())
+		var settings_button = node.get_node("VBoxContainer/settings")
+		node.get_node("VBoxContainer").add_child_below_node(settings_button, MAINMENU_BUTTON.instance())
 
 # https://github.com/puppy-girl/TackleBox/blob/main/README.md
 func _init_config() -> void:
