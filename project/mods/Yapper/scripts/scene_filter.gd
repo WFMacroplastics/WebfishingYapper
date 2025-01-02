@@ -40,14 +40,23 @@ func _scene_filterer(node:Node):
 #		print(node.get_class(), " - ", node.text)
 		_connect(node, "text")
 
+
+# Due to the way that mouse filters work, sometimes objects will overshadow
+# interactables on the same layer. Resizing sometimes fixes these conflicts.
 func _label_resize_hacks(label: Label):
 	var np = label.get_parent()
 	if not np: return
-	# Hack to get playercount filter dial working
+
+	# Hack to fix lobby name in players tab of backpack
+	if label.name == "player_count":
+		label.anchor_left = 0.7
+	if label.name == "server_name":
+		label.anchor_right = 0.7
+	# Hack to fix playercount filter dial
 	if np.name == "dial":
 		label.rect_position = Vector2(0, 78)
 		label.rect_size = Vector2(233, 34)
-	# Hack to get bait menu x button working
+	# Hack to fix bait menu x button
 	if np.name == "bait_menu":
 		label.anchor_left = 0.1
 		label.anchor_right = 0.9
