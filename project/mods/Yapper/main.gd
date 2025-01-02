@@ -29,8 +29,8 @@ var default_config: Dictionary = {
 # There might be a need for a better system than this
 var source_list: Dictionary = {
 	"dialogue": {"autosay": true},
-	"tooltip": {"autosay": false, "current_text": [null, null]},
 	"ui": {"autosay": false, "current_text": [null, null]},
+	"tooltip": {"autosay": false, "current_text": [null, null]},
 	"chat": {"autosay": true},
 }
 
@@ -98,7 +98,7 @@ func _on_tts_button():
 
 		var cur_txt = src["current_text"]
 		var phrase = cur_txt[0]
-		if extended and cur_txt[1] != null:
+		if extended:
 			phrase = cur_txt[1]
 
 		if phrase == null: continue
