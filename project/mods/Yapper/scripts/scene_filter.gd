@@ -47,6 +47,10 @@ func _label_resize_hacks(label: Label):
 	if np.name == "dial":
 		label.rect_position = Vector2(0, 78)
 		label.rect_size = Vector2(233, 34)
+	# Hack to get bait menu x button working
+	if np.name == "bait_menu":
+		label.anchor_left = 0.1
+		label.anchor_right = 0.9
 
 func _connect(node: Node, prop: String):
 	if not node.has_signal("mouse_entered"): return
