@@ -25,6 +25,7 @@ func _scene_filterer(node:Node):
 #		print("RichTextLabel - ", node.get_class(), " ", node.bbcode_text)
 		_connect(node, "text")
 	elif node is Label and not node.name == "stack_count":
+		_label_resize_hacks(node)
 		node.mouse_filter = Control.MOUSE_FILTER_PASS
 #		print("Label - ", node.text)
 		_connect(node, "text")
@@ -38,6 +39,14 @@ func _scene_filterer(node:Node):
 	elif node.get("text") and not node.name == "stack_count":
 #		print(node.get_class(), " - ", node.text)
 		_connect(node, "text")
+
+func _label_resize_hacks(label: Label):
+	var np = label.get_parent()
+	if not np: return
+	# Hack to get playercount filter dial working
+	if np.name == "dial":
+		label.rect_position = Vector2(0, 78)
+		label.rect_size = Vector2(233, 34)
 
 func _connect(node: Node, prop: String):
 	if not node.has_signal("mouse_entered"): return
